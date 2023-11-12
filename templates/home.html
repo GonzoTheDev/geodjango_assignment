@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<body>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <a class="navbar-brand px-2"><i class="fa-solid fa-fish" style="color: #00aacc;"></i> Dublin Fishing Guide</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'map' %}">Fishing Marks</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    
+    <div class="container">
+    <br>
+    <h1>Welcome to the official fishing guide for Dublin!</h1>
+    <p>Here you will find all the information you need to catch fish in Dublin! Including local fishing marks and the tactics required!</p>
+    <div class="text-center">
+        <img src="https://i.pinimg.com/originals/1d/1d/d9/1d1dd98c36426e5f0377b994ae09cf20.jpg" alt="fish" width="50%"/>
+    </div>
+    </div>
+</body>
+{% else %}
+
+<meta http-equiv="REFRESH" content="0;url={% url 'login' %}">
+
+{% endif %}
+
+<style>
+
+</style>
+{% endblock %} 
