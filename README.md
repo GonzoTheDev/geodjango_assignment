@@ -6,7 +6,7 @@ A fishing mark locations map application, showing fishing locations around Dubli
 Website: https://geodjango.shanewilson.ie
 
 
-Login
+**Login**
 
 Username: test_user
 
