@@ -35,9 +35,17 @@ Create the Django application container from the image:
 docker create --name geodjango_assignment --network geodjango_assignment_network --network-alias geodjango_assignment -t -p 8001:8001 drgonzo19929/geodjango_assignment
 ```
 
-Start the Django application:
+Create the certbot and nginx server container:
 ```bash
+docker create --name geodjango_assignment_nginx_certbot --network geodjango_assignment_network --network-alias geodjango-assignment-nginx-certbot -p 80:80 -p 443:443 -t -v geodjango_assignment_web_data:/usr/share/nginx/html -v $HOME/geodjango_assignment_nginx_certbot/conf:/etc/nginx/conf.d -v /etc/letsencrypt:/etc/letsencrypt -v /var/www/certbot -v html_data:/usr/share/nginx/html/static geodjango_assignment_nginx_certbot
+```
+
+Start the containers in order:
+```bash
+docker start geodjango_assignment_postgis
+docker start geodjango_assignment_pgadmin4
 docker start geodjango_assignment
+docker start geodjango_assignment_nginx_certbot
 ```
 
 Run the migrations:
@@ -54,4 +62,7 @@ Create a superuser to be able to setup users etc. :
 ```bash
 docker exec geodjango_assignment bash -c "conda run -n geodjango_assignment python manage.py createsuperuser"
 ```
+
+
+
 
