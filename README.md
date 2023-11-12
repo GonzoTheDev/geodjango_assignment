@@ -2,7 +2,11 @@
 
 A fishing mark locations map application, showing fishing locations around Dublin and the types of fish you can catch there.
 
-Website: https://geodjango.shanewilson.ie
+**Website:** https://geodjango.shanewilson.ie
+
+**Login**
+Username: test_user
+Password: test_password
 
 
 # Steps to Deploy to cloud
