@@ -1,0 +1,53 @@
+name: geodjango_assignment
+services:
+    postgis:
+        container_name: geodjango_assignment_postgis
+        networks:
+            geodjango_assignment_network:
+                aliases:
+                    - geodjango-assignment-postgis
+        tty: true
+        volumes:
+            - geodjango_assignment_postgis_data:/var/lib/postgresql
+        environment:
+            - POSTGRES_USER=c20703429
+            - POSTGRES_PASS=c20703429
+        ports:
+            - 25432:5432
+        image: kartoza/postgis
+    pgadmin4:
+        container_name: geodjango_assignment_pgadmin4
+        networks:
+            geodjango_assignment_network:
+                aliases:
+                    - geodjango-assignment-pgadmin4
+        tty: true
+        volumes:
+            - geodjango_assignment_pgadmin_data:/var/lib/pgadmin
+        environment:
+            - PGADMIN_DEFAULT_c20703429@mytudublin.ie
+            - PGADMIN_DEFAULT_PASSWORD=c20703429
+        ports:
+            - 20080:80
+        image: dpage/pgadmin4
+    geodjango_assignment:
+        container_name: geodjango_assignment
+        networks:
+            geodjango_assignment_network:
+                aliases:
+                    - geodjango_assignment
+        tty: true
+        ports:
+            - 8001:8001
+        image: drgonzo19929/geodjango_assignment_ca2
+networks:
+    geodjango_assignment_network:
+        external:
+            name: geodjango_assignment_network
+volumes:
+    geodjango_assignment_postgis_data:
+        external:
+            name: geodjango_assignment_postgis_data
+    geodjango_assignment_pgadmin_data:
+        external:
+            name: geodjango_assignment_pgadmin_data
