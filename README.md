@@ -15,6 +15,11 @@ Password: test_password
 
 # Steps to Deploy to cloud
 
+Create the docker network:
+```bash
+docker network create geodjango_assignment_network
+```
+
 Create Postgres GIS database container in docker:
 ```bash
 docker create --name geodjango_assignment_postgis --network geodjango_assignment_network --network-alias geodjango-assignment-postgis -t -v geodjango_assignment_postgis_data:/var/lib/postgresql -e 'POSTGRES_USER=c20703429' -e 'POSTGRES_PASS=c20703429' kartoza/postgis
@@ -33,6 +38,12 @@ docker pull drgonzo19929/geodjango_assignment
 Create the Django application container from the image:
 ```bash
 docker create --name geodjango_assignment --network geodjango_assignment_network --network-alias geodjango_assignment -t -p 8001:8001 drgonzo19929/geodjango_assignment
+```
+
+Create the certbot docker image:
+```bash
+cd certbot
+docker build -t geodjango_assignment_nginx_certbot .
 ```
 
 Create the certbot and nginx server container:
