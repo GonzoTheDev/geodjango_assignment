@@ -37,3 +37,5 @@ def map_view(request):
     fishingmarks = fishingmark_model.objects.all()
     return render(request, "map.html", {"fishingmarks": fishingmarks, "favourite_mark": user_profile.description, "last_updated": user_profile.last_updated})
 
+
+

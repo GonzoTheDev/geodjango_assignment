@@ -44,7 +44,7 @@
             </div>
             <div class="col-md-6">
                 <div class="alert alert-primary">
-                    <h4 class="alert-heading">Your current favourite fishing mark is: </h4><p><span id="favouriteLocation">{{ favourite_mark }}</span></p>
+                    <h4 class="alert-heading text-center">Your current favourite fishing mark is: </h4><p><span id="favouriteLocation">{{ favourite_mark }}</span></p>
                     <p>favourite since: <span id="lastUpdated">{{ last_updated }}</span></p>
                 </div>
             </div>
@@ -91,6 +91,7 @@
         return d;
     }
 
+    
     function map_init(map, options) {
         if ("geolocation" in navigator) {
             var closestFishingmark;
