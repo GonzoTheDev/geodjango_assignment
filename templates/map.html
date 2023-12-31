@@ -42,6 +42,15 @@
                     Nearest fishing mark - <b id="address-location"></b>
                 </div>
             </div>
+            <div class="col-md-12">
+                <div class="alert alert-dark">
+                    <div id="chatbox">
+                        <!-- Messages will appear here -->
+                    </div>
+                    <input type="text" id="userInput" placeholder="Ask the fishing assistant...">
+                    <button class="sendBtn" onclick="sendMessage()">Send</button>
+                </div>
+            </div>
             <div class="col-md-6">
                 <div class="alert alert-primary">
                     <h4 class="alert-heading text-center">Your current favourite fishing mark is: </h4><p><span id="favouriteLocation">{{ favourite_mark }}</span></p>
@@ -232,6 +241,31 @@
         });
     }
 
+    function sendMessage() {
+        var inputField = document.getElementById("userInput");
+        var message = inputField.value;
+        document.getElementById("chatbox").innerHTML += "<p><b>You: </b>" + message + "</p>";
+        var userLat = document.getElementById("latitude").innerHTML;
+        var userLon = document.getElementById("longitude").innerHTML;
+        var location = userLat + "," + userLon;
+
+        // Send the message to the Django backend
+        fetch(`/chatbot/?message=${encodeURIComponent(message)}&location=${encodeURIComponent(location)}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("chatbox").innerHTML += "<p class='assistant'><b>Fishing Assistant: </b>" + data.response + "</p>";
+            });
+
+        inputField.value = ""; // Clear the input field
+        
+    }
+
+    document.getElementById("userInput").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault(); // Prevent the default action to avoid form submission
+            sendMessage();
+        }
+    });
     </script>
 
 {% else %}
