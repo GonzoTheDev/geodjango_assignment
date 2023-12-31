@@ -24,7 +24,7 @@ def update_location(request):
         user_profile.lon = lon
         user_profile.lat = lat
         user_profile.location = map_point
-        user_profile.description = f"Your current favourite fishing mark is {description}"
+        user_profile.description = f"{description}"
         user_profile.save()
         return JsonResponse({"message": f"Set location to lat: {lat}, lon: {lon}."}, status=200)
     except Exception as e:
@@ -32,8 +32,8 @@ def update_location(request):
 
 @login_required
 def map_view(request):
-    # lazy import to avoid circular import
     user_profile = Profile.objects.get(user=request.user)
     fishingmark_model = apps.get_model("userlocation", "Fishingmark")
     fishingmarks = fishingmark_model.objects.all()
     return render(request, "map.html", {"fishingmarks": fishingmarks, "favourite_mark": user_profile.description, "last_updated": user_profile.last_updated})
+

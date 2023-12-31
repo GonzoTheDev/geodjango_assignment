@@ -26,4 +26,5 @@ urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),
     path("map/", map_view, name="map"),
     path("updatedb/", update_location, name="update_location"),
+    path("", include("pwa.urls")),
 ]

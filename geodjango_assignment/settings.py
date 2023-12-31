@@ -26,7 +26,7 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 SECRET_KEY = '%9@gm3nm1$%9uo^^t94@$kbobmwt+g0)peegrv)w8=sr8^9szp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*', ]
 
@@ -187,6 +187,8 @@ CSRF_TRUSTED_ORIGINS = [
     'https://geodjango.shanewilson.ie'
 ]
 
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'static/assets/js', 'serviceworker.js')
+
 PWA_APP_NAME = 'Dublin Fishing Guide'
 PWA_APP_DESCRIPTION = "A guide to fishing in Dublin!"
 PWA_APP_THEME_COLOR = '#0A0302'
@@ -199,19 +201,19 @@ PWA_APP_STATUS_BAR_COLOR = 'default'
 PWA_APP_ICONS = [
     {
         'src': '/static/assets/images/my_app_icon.png',
-        'sizes': '160x160'
+        'sizes': '192x171'
     }
 ]
 PWA_APP_ICONS_APPLE = [
     {
         'src': '/static/assets/images/my_app_icon.png',
-        'sizes': '160x160'
+        'sizes': '192x171'
     }
 ]
 PWA_APP_SPLASH_SCREEN = [
     {
         'src': '/static/assets/images/splash.png',
-        'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'
+        'media': '(max-width: 1024px)'
     }
 ]
 PWA_APP_DIR = 'ltr'
