@@ -30,6 +30,7 @@ label[for="id_username"], label[for="id_password"] {
 .updatedb {
     margin-bottom: 20px !important;
     float: left !important;
+    color: white;
 }
 
 .custom-icon {
@@ -97,6 +98,13 @@ main {
     background-color: white;
     border-radius: 8px;
     border: 1px solid #ddd;
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+
+    /* For Webkit browsers like Chrome and Safari */
+    ::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 #chatbox p {
@@ -108,7 +116,7 @@ main {
 }
 
 .assistant{
-    background-color: #7aa2c9 !important;
+    background-color: #3da998 !important;
     color: #fff !important;
 }
 
@@ -132,4 +140,14 @@ main {
 
 sendBtn:hover {
     background-color: #0056b3;
+}
+
+#loadingSpinner {
+    width: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.loading_gif {
+    width: 50px;
 }

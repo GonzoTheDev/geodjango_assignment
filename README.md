@@ -37,7 +37,7 @@ docker pull drgonzo19929/geodjango_assignment
 
 Create the Django application container from the image:
 ```bash
-docker create --name geodjango_assignment --network geodjango_assignment_network --network-alias geodjango_assignment -t -p 8001:8001 drgonzo19929/geodjango_assignment
+docker create --name geodjango_assignment --network geodjango_assignment_network --network-alias geodjango_assignment -t -p 8001:8001 -e OPENAI_API_KEY=YOUR_API_KEY_HERE drgonzo19929/geodjango_assignment_ca2
 ```
 
 Create the certbot docker image:

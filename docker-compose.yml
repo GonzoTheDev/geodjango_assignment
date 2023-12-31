@@ -39,6 +39,8 @@ services:
         tty: true
         ports:
             - 8001:8001
+        environment:
+            - OPENAI_API_KEY=${OPENAI_API_KEY}
         image: drgonzo19929/geodjango_assignment_ca2
 networks:
     geodjango_assignment_network:
