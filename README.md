@@ -1,6 +1,6 @@
 # GeoDjango Fishing Mark Map
 
-A fishing mark locations map application, showing fishing locations around Dublin and the types of fish you can catch there.
+A fishing mark locations map application, showing fishing locations around Ireland and the types of fish you can catch there.
 
 
 Website: https://geodjango.shanewilson.ie

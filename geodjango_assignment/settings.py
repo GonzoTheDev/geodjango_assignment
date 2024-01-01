@@ -136,8 +136,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 CRISPY_FAIL_SILENTLY = not DEBUG
 
 LEAFLET_CONFIG = {
-    'DEFAULT_CENTER': (53.34, -6.26),
-    'DEFAULT_ZOOM': 10,
+    'DEFAULT_CENTER': (53.377651874950075, -7.478513691999692),
+    'DEFAULT_ZOOM': 18,
     'MIN_ZOOM': 3,
     'MAX_ZOOM': 18,
     'RESET_VIEW': False,
@@ -187,10 +187,10 @@ CSRF_TRUSTED_ORIGINS = [
     'https://geodjango.shanewilson.ie'
 ]
 
+# PWA SETTINGS
 PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'static/assets/js', 'serviceworker.js')
-
-PWA_APP_NAME = 'Dublin Fishing Guide'
-PWA_APP_DESCRIPTION = "A guide to fishing in Dublin!"
+PWA_APP_NAME = 'Ireland Fishing Guide'
+PWA_APP_DESCRIPTION = "A guide to fishing in Ireland!"
 PWA_APP_THEME_COLOR = '#0A0302'
 PWA_APP_BACKGROUND_COLOR = '#ffffff'
 PWA_APP_DISPLAY = 'standalone'
