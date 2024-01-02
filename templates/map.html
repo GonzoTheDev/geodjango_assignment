@@ -33,15 +33,16 @@
     <!-- Content -->
     <div class="container data-vis">
         <div class="row">
+            <!-- Nearest mark alert -->
+            <div class="col-md-12">
+                <div class="alert alert-success">
+                    Nearest fishing mark - <b id="address-location"></b>
+                </div>
+            </div>
             <!-- Map -->
             <div class="col-md-12">
                 <div class="map">
                     {% leaflet_map "fishing_map" callback="window.map_init" %}
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="mt-3 mb-3">
-                    Nearest fishing mark - <b id="address-location"></b>
                 </div>
             </div>
             <!-- Chatbot -->
@@ -62,7 +63,7 @@
             <div class="col-md-6">
                 <div class="alert alert-primary">
                     <h4 class="alert-heading text-center">Your current favourite fishing mark is: </h4><p><span id="favouriteLocation">{{ favourite_mark }}</span></p>
-                    <p>favourite since: <span id="lastUpdated">{{ last_updated }}</span></p>
+                    
                 </div>
             </div>
             <!-- Location Info -->
@@ -99,6 +100,7 @@
     var favoriteMarkDescription = "{{ favourite_mark }}";
     var currentFavoriteMarker = null; 
     var allMarkers = {};
+    var closestFishingmark = null;
 
     // Function to convert degrees to radians
     function toRadians(degrees) {
@@ -128,7 +130,6 @@
         if ("geolocation" in navigator) {
 
             // Initialize local variables
-            var closestFishingmark;
             var shortestDistance;
 
             // Get the user's location
@@ -351,9 +352,12 @@
         var userLon = document.getElementById("longitude").innerHTML;
         var location = userLat + "," + userLon;
         var chats = document.getElementById("chatbox");
+        var closestmark = document.getElementById("address-location").innerHTML;
 
+        console.log(`/chatbot/?message=${encodeURIComponent(message)}&location=${encodeURIComponent(location)}&closestmark=${encodeURIComponent(closestmark)}`)
+        
         // Send the message to the Django backend that handles chatbot requests
-        fetch(`/chatbot/?message=${encodeURIComponent(message)}&location=${encodeURIComponent(location)}`)
+        fetch(`/chatbot/?message=${encodeURIComponent(message)}&location=${encodeURIComponent(location)}&closestmark=${encodeURIComponent(closestmark)}`)
             .then(response => response.json())
             .then(data => {
                 document.getElementById("loadingSpinner").style.display = 'none';
@@ -361,7 +365,7 @@
             });
         
         // Scroll to the bottom of the chatbox conversation
-        chats.scrollTop = chatBox.scrollHeight;
+        chats.scrollTop = chats.scrollHeight;
 
         // Clear the input field
         inputField.value = ""; 

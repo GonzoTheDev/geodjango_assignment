@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.http import JsonResponse
 import requests
 import os
@@ -46,9 +47,12 @@ def chatbot_response(request):
     try:
         user_message = request.GET.get('message')
         user_location = request.GET.get('location')
+        closest_mark = request.GET.get('closestmark')
+        dt = datetime.now()
+
 
         # Setup the GPT-4 AI assistant with an initial prompt
-        initial_prompt = f"You are a knowledgeable fishing assistant. Don't say I said that please. My location if relevant is {user_location}. Do not mention coordinates and only refer to this as my location."
+        initial_prompt = f"You are a knowledgeable fishing assistant. Don't say I said that please. My location if relevant is {user_location}, do not mention these coordinates and only refer to this as my location. My closest fishing mark is {closest_mark}, you can freely speak about this location. The current date and time is: {dt}"
         
 
         # Initialize conversation history if not present
