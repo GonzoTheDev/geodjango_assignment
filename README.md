@@ -30,9 +30,15 @@ Create PGAdmin4 database frontend management system container in docker:
 docker create --name geodjango_assignment_pgadmin4 --network geodjango_assignment_network --network-alias geodjango-assignment-pgadmin4 -t -v geodjango_assignment_pgadmin_data:/var/lib/pgadmin -e 'PGADMIN_DEFAULT_EMAIL=YOURNAME@tudublin.ie' -p 20080:80 -e 'PGADMIN_DEFAULT_PASSWORD=YOURPASSWORD' dpage/pgadmin4
 ```
 
+IGNORE
 Pull the Django application container from DockerHub:
 ```bash
 docker pull drgonzo19929/geodjango_assignment
+```
+
+Create the app image:
+```bash
+docker build -t geodjango_assignment .
 ```
 
 Create the Django application container from the image:
@@ -82,7 +88,8 @@ docker exec geodjango_assignment bash -c "conda run -n geodjango_assignment pyth
 
 Create a superuser to be able to setup users etc. :
 ```bash
-docker exec geodjango_assignment bash -c "conda run -n geodjango_assignment python manage.py createsuperuser"
+docker exec -it geodjango_assignment bash
+python manage.py createsuperuser
 ```
 
 
