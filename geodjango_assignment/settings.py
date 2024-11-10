@@ -26,7 +26,7 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 SECRET_KEY = '%9@gm3nm1$%9uo^^t94@$kbobmwt+g0)peegrv)w8=sr8^9szp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*', ]
 
@@ -99,8 +99,8 @@ DATABASES = {
 
 import socket
 
-LOCAL_DOCKER_TEST = False
-DEPLOY_SECURE = True
+LOCAL_DOCKER_TEST = True
+DEPLOY_SECURE = False
 
 if LOCAL_DOCKER_TEST:
     DATABASES["default"]["HOST"] = "geodjango-assignment-postgis"

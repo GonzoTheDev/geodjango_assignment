@@ -4,4 +4,4 @@ from .models import User, Profile, Fishingmark
 
 admin.site.register(User)
 admin.site.register(Profile)
-admin.site.register(Fishingmark, admin.OSMGeoAdmin)
+admin.site.register(Fishingmark, admin.ModelAdmin)

@@ -6,6 +6,7 @@ ENV DJANGO_SETTINGS_MODULE=geodjango_assignment.settings
 # Ensure that everything is up-to-date
 RUN apt-get -y update && apt-get -y upgrade
 RUN conda update -n base conda && conda update -n base --all
+RUN apt-get install -y binutils libproj-dev gdal-bin
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
