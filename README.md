@@ -1,6 +1,6 @@
 # GeoDjango Fishing Mark Map
 
-A fishing mark locations map application, showing fishing locations around Dublin and the types of fish you can catch there.
+A fishing mark locations map application, showing fishing locations around Ireland and the types of fish you can catch there.
 
 
 Website: https://geodjango.shanewilson.ie
@@ -14,6 +14,11 @@ Password: test_password
 
 
 # Steps to Deploy to cloud
+
+Create the docker network:
+```bash
+docker network create geodjango_assignment_network
+```
 
 Create Postgres GIS database container in docker:
 ```bash
@@ -32,12 +37,29 @@ docker pull drgonzo19929/geodjango_assignment
 
 Create the Django application container from the image:
 ```bash
-docker create --name geodjango_assignment --network geodjango_assignment_network --network-alias geodjango_assignment -t -p 8001:8001 drgonzo19929/geodjango_assignment
+docker create --name geodjango_assignment --network geodjango_assignment_network --network-alias geodjango_assignment -t -p 8001:8001 geodjango_assignment
+```
+
+Create the certbot docker image:
+```bash
+cd certbot
+docker build -t geodjango_assignment_nginx_certbot .
 ```
 
 Create the certbot and nginx server container:
 ```bash
 docker create --name geodjango_assignment_nginx_certbot --network geodjango_assignment_network --network-alias geodjango-assignment-nginx-certbot -p 80:80 -p 443:443 -t -v geodjango_assignment_web_data:/usr/share/nginx/html -v $HOME/geodjango_assignment_nginx_certbot/conf:/etc/nginx/conf.d -v /etc/letsencrypt:/etc/letsencrypt -v /var/www/certbot -v html_data:/usr/share/nginx/html/static geodjango_assignment_nginx_certbot
+```
+
+Setup the SSL cert with certbot inside the container:
+```bash
+docker exec -it geodjango_assignment_nginx_certbot /bin/bash
+certbot certonly --nginx
+```
+
+Move the configuration files (geodjango_assingment.conf & headers.conf) to correct directory
+```bash
+mv $HOME/geodjango_assignment/conf $HOME/geodjango_assignment_nginx_certbot/conf
 ```
 
 Start the containers in order:
@@ -62,7 +84,5 @@ Create a superuser to be able to setup users etc. :
 ```bash
 docker exec geodjango_assignment bash -c "conda run -n geodjango_assignment python manage.py createsuperuser"
 ```
-
-
 
 
